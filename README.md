@@ -25,7 +25,7 @@ a look at how we would build this out in our `Node` class.
 
 ```rb
 class Node
-  attr_accessor :data, :next_node
+  attr_accessor :data, :next_node, :prev_node
 
   def initialize(data, next_node = nil, prev_node = nil)
     @data = data
@@ -36,24 +36,68 @@ end
 ```
 
 All we really had to do was add `@prev_node` into our initializer, and now we
-have two pointers on our Node, one going to the nextnode in the list and one
-going to the orevious. ## When to use a Doubly Linked List
+have two pointers on our Node, so that each Node points in two directions: to
+the next node in the list, and to the previous node. While this is a really
+small and easy change to make to the structure of our Node, by doing this change
+we are able to make our Linked List much more useful, efficent, and dynamic!
 
-<!-- Linked Lists are ideal for situations when you need quick insertion and
-deletion, but are more expensive than arrays when it comes to searching, since
-arrays are indexed. The Big O for both insertion as well as deletion at a known
-node in a linked list is `0(1)` because we don't need to update indexes for the
-other elements in the list when a new element is added: we just need to adjust
-which node the `next_node` points to. With an array, insertion and deletion from
-anywhere other than the end are `O(n)`, because other elements need to be
-reindexed. -->
+>> pupper DDL image here 
+
+## When to use a Doubly Linked List
+
+Let's say we have a Singly Linked List, and we wanted to `pop` (or remove) an
+item off, we would have to iterate through the _entire_ list in order to find
+the second to last node in the list and assign it as the new tail, since we
+can't go directly to the tail and work backwards.
+
+```rb
+  def pop
+    return unless head
+
+    curr = head
+    prev = nil
+    while curr.next_node
+      prev = curr
+      curr = curr.next_node
+    end
+
+    prev.next_node = nil
+  end
+```
+
+But, with a Doubly Linked List, we already have a pointer on the tail pointing
+to the previous node, so we are able to just take that one step backwards by
+using `.prev_node`, without needing to iterate!
+
+```rb
+  def pop
+    return unless head
+    
+      old_tail = @tail
+    if @length==1
+      @head = nil
+      @tail = nil
+    else 
+      @tail = old_tail.prev_node
+      new_tail.next = nil
+      old_tail.prev_node = nil 
+    end
+    @length -= 1
+    return old_tail
+  end
+```
+
 
 ## Conclusion
 
-We use linked lists because they can be less expensive than arrays when it comes
-to insertion and deletion within lists. Linked Lists are a very common interview
-data structure, so make sure you get to know them! In the next lesson, we'll
-build more methods in our `LinkedList` class.
+In the end Singly Linked Lists and Doubly Linked Lists are very similar; unlike
+arrays they are not indexed, and they use pointers to access the nodes around
+them. Singly Linked Lists are just one directional while Doubly Linked Lists go
+both ways. The biggest trade off is the memory and space that a Doubly Linked
+List takes up in comparison to a Singly Linked List, since we have to account
+for and keep track of multiple pointers on each node. However, they are (or can
+be) less expensive in terms of time because of the flexibility that added memory
+and space gives us!
 
 ## Resources
 
