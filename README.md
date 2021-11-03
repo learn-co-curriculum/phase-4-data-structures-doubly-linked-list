@@ -41,7 +41,7 @@ next node in the list, and to the previous node. While this is a really small
 and easy change to make to the structure of our node, by doing this change we
 are able to make our linked list much more useful, efficient, and dynamic!
 
->> pupper DDL image here 
+[Pup Linked List](https://curriculum-content.s3.amazonaws.com/pup_doubly_linked_list.png)
 
 ## Singly vs Doubly Linked Lists
 
