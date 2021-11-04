@@ -41,12 +41,12 @@ next node in the list, and to the previous node. While this is a really small
 and easy change to make to the structure of our node, by doing this change we
 are able to make our linked list much more useful, efficient, and dynamic!
 
-[Pup Linked List](https://curriculum-content.s3.amazonaws.com/pup_doubly_linked_list.png)
+![Pup Linked List](https://curriculum-content.s3.amazonaws.com/phase-4/phase-4-data-structures-doubly-linked-list/pup_doubly_linked_list.png)
 
 ## Singly vs Doubly Linked Lists
 
 One way we can improve the time complexity of our singly linked list
-implementation is by adding additional references to modes in the list. For
+implementation is by adding additional references to nodes in the list. For
 example, consider the following `SinglyLinkedList` class:
 
 ```rb
